@@ -3,9 +3,9 @@ const jwt = require('jsonwebtoken');
 
 const validateToken = asyncHandler(async(req,res,next) => {
     let token;
-    let autHeader = req.headers.authorization || req.headers.authorization;
-    if(autHeader && autHeader.startsWith('Bearer')){
-        token = autHeader.split(" ")[1];
+    let authHeader = req.headers.Authorization || req.headers.authorization;
+    if(authHeader && authHeader.startsWith("Bearer")){
+        token = authHeader.split(" ")[1];
         jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
             if(err) {
                 res.status(401);
